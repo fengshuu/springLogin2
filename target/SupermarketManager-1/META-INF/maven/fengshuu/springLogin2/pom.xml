@@ -190,7 +190,12 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.41</version>
+      <version>8.0.11</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.6</version>
     </dependency>
   </dependencies>
 
@@ -198,6 +203,16 @@
     <!-- 项目名称 -->
     <finalName>SupermarketManager</finalName>
     <defaultGoal>package</defaultGoal>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -208,6 +223,22 @@
           <port>9091</port>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>${project.basedir}/src/main/resources</directory>
+              <targetPath>WEB-INF/classes/</targetPath>
+              <filtering>false</filtering>
+
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
